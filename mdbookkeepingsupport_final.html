@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Bookkeeping Support | Leicester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; color: #111; background: #fff; -webkit-font-smoothing: antialiased; }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: #111; padding: 0 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 62px; border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .nav-logo {
+            color: #fff; font-weight: 700; font-size: 1rem;
+            letter-spacing: 0.04em; text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: rgba(255,255,255,0.72); text-decoration: none;
+            font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #fff; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .hamburger span { width: 22px; height: 2px; background: #fff; display: block; transition: 0.2s; }
+
+        /* ── SECTIONS ── */
+        section { padding: 6rem 2rem; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .section-label {
+            font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+            color: #999; margin-bottom: 1rem; display: block;
+        }
+        .section-title {
+            font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700;
+            line-height: 1.12; margin-bottom: 3rem;
+        }
+
+        /* ── HERO ── */
+        #home {
+            min-height: 100vh; display: flex; align-items: center;
+            background: #111; color: #fff; padding-top: 62px;
+        }
+        .hero-eyebrow {
+            font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; display: block;
+        }
+        .hero-headline {
+            font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700;
+            line-height: 1.02; margin-bottom: 1.5rem; letter-spacing: -0.02em;
+        }
+        .hero-headline .dim { color: rgba(255,255,255,0.35); }
+        .hero-sub {
+            font-size: 1.05rem; color: rgba(255,255,255,0.62);
+            max-width: 440px; line-height: 1.7; margin-bottom: 2.5rem;
+        }
+        .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-block; background: #fff; color: #111;
+            padding: 0.9rem 1.8rem; font-weight: 600; font-size: 0.92rem;
+            text-decoration: none; letter-spacing: 0.02em; transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.88; }
+        .btn-outline {
+            display: inline-block; border: 1.5px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.8); padding: 0.9rem 1.8rem;
+            font-weight: 500; font-size: 0.92rem; text-decoration: none;
+            letter-spacing: 0.02em; transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-outline:hover { border-color: #fff; color: #fff; }
+
+        /* ── SERVICES ── */
+        #services { background: #fff; }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1px; background: #e0e0e0;
+            border: 1px solid #e0e0e0; margin-bottom: 2rem;
+        }
+        .service-card { background: #fff; padding: 2rem 1.75rem; }
+        .service-number {
+            font-size: 0.7rem; color: #ccc; margin-bottom: 1.25rem;
+            font-weight: 600; letter-spacing: 0.12em;
+        }
+        .service-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+        .service-desc { font-size: 0.88rem; color: #555; line-height: 1.65; }
+        .disclaimer {
+            padding: 1.25rem 1.5rem; background: #f7f7f7;
+            border-left: 3px solid #111; font-size: 0.84rem;
+            color: #555; line-height: 1.65;
+        }
+
+        /* ── PRICES ── */
+        #prices { background: #f5f5f5; }
+        .price-tag {
+            font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700;
+            letter-spacing: -0.02em; margin-bottom: 0.25rem; line-height: 1;
+        }
+        .price-tag .unit { font-size: 1rem; font-weight: 400; color: #777; }
+        .pricing-sub {
+            font-size: 0.95rem; color: #555; line-height: 1.65;
+            max-width: 480px; margin-top: 0.75rem; margin-bottom: 2.5rem;
+        }
+        .quote-form {
+            background: #fff; padding: 2.5rem;
+            border: 1px solid #e0e0e0; max-width: 640px;
+        }
+        .form-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .form-sub { font-size: 0.85rem; color: #777; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label {
+            display: block; font-size: 0.82rem; font-weight: 600;
+            margin-bottom: 0.45rem; color: #333;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 0.72rem 0.9rem;
+            border: 1.5px solid #e0e0e0; font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem; color: #111; background: #fff;
+            outline: none; transition: border-color 0.2s;
+            border-radius: 0; -webkit-appearance: none; appearance: none;
+        }
+        .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.5rem; }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: #111; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .btn-submit {
+            width: 100%; background: #111; color: #fff; border: none;
+            padding: 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+            font-weight: 600; cursor: pointer; letter-spacing: 0.02em;
+            transition: opacity 0.2s; margin-top: 0.25rem;
+        }
+        .btn-submit:hover { opacity: 0.85; }
+        .form-note {
+            font-size: 0.78rem; color: #aaa; margin-top: 0.8rem;
+            text-align: center; line-height: 1.5;
+        }
+
+        /* ── ABOUT ── */
+        #about { background: #111; color: #fff; }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 5rem; align-items: start;
+        }
+        .about-text .section-label { color: rgba(255,255,255,0.35); }
+        .about-text h2 {
+            font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700;
+            line-height: 1.12; margin-bottom: 1.5rem;
+        }
+        .about-text p {
+            color: rgba(255,255,255,0.65); line-height: 1.75;
+            margin-bottom: 1rem; font-size: 0.95rem;
+        }
+        .about-contact .section-label { color: rgba(255,255,255,0.35); }
+        .contact-block { margin-bottom: 1.75rem; }
+        .contact-label {
+            font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+            color: rgba(255,255,255,0.35); margin-bottom: 0.35rem;
+        }
+        .contact-value { font-size: 0.95rem; font-weight: 500; }
+        .contact-value a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 1px; transition: border-color 0.2s; }
+        .contact-value a:hover { border-color: #fff; }
+        .wa-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: #25D366; color: #fff; padding: 0.85rem 1.5rem;
+            text-decoration: none; font-weight: 600; font-size: 0.88rem;
+            transition: opacity 0.2s; margin-top: 0.5rem;
+        }
+        .wa-btn:hover { opacity: 0.88; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #0a0a0a; color: rgba(255,255,255,0.3);
+            padding: 1.5rem 2rem; text-align: center; font-size: 0.78rem;
+        }
+
+        /* ── FLOATING WA ── */
+        .wa-float {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99;
+            background: #25D366; width: 54px; height: 54px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.22); text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .wa-float:hover { transform: scale(1.08); }
+        .wa-icon { width: 26px; height: 26px; fill: #fff; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 720px) {
+            section { padding: 4.5rem 1.25rem; }
+            .nav-links {
+                display: none; flex-direction: column;
+                position: absolute; top: 62px; left: 0; right: 0;
+                background: #111; padding: 1.5rem 1.5rem;
+                gap: 1.25rem; border-top: 1px solid rgba(255,255,255,0.06);
+            }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .services-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-ctas { flex-direction: column; }
+            .btn-primary, .btn-outline { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#home" class="nav-logo">MD Bookkeeping Support</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="closeMenu()">Home</a></li>
+        <li><a href="#services" onclick="closeMenu()">Services</a></li>
+        <li><a href="#prices" onclick="closeMenu()">Prices</a></li>
+        <li><a href="#about" onclick="closeMenu()">About</a></li>
+    </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+    <div class="container">
+        <span class="hero-eyebrow">Leicester-based bookkeeping support</span>
+        <h1 class="hero-headline">Your books.<br><span class="dim">Sorted.</span></h1>
+        <p class="hero-sub">Simple, stress-free bookkeeping for sole traders. I handle your records so you can focus on running your business.</p>
+        <div class="hero-ctas">
+            <a href="#prices" class="btn-primary">Get a free quote</a>
+            <a href="#services" class="btn-outline">What I do</a>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <div class="container">
+        <span class="section-label">What I do</span>
+        <h2 class="section-title">Monthly bookkeeping,<br>done properly.</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <p class="service-number">01</p>
+                <h3 class="service-name">Record Keeping</h3>
+                <p class="service-desc">All your income and expenses recorded accurately every month. No more shoeboxes of receipts or trying to remember what you spent three months ago.</p>
+            </div>
+            <div class="service-card">
+                <p class="service-number">02</p>
+                <h3 class="service-name">Bank Reconciliation</h3>
+                <p class="service-desc">Your records matched against your bank statements so everything lines up exactly as it should — giving you a clear, accurate picture every month.</p>
+            </div>
+            <div class="service-card">
+                <p class="service-number">03</p>
+                <h3 class="service-name">Cash Flow Tracking</h3>
+                <p class="service-desc">Know exactly what your business made, spent, and has left — without having to sit down and work it out yourself every month.</p>
+            </div>
+            <div class="service-card">
+                <p class="service-number">04</p>
+                <h3 class="service-name">Ready for Your Accountant</h3>
+                <p class="service-desc">Clean, organised records handed over to your accountant at year end. No mess, no last-minute panic. They can just get on with the job.</p>
+            </div>
+        </div>
+        <div class="disclaimer">
+            MD Bookkeeping Support handles your day-to-day records and bookkeeping. Final accounts and tax returns are referred to a qualified accountant.
+        </div>
+    </div>
+</section>
+
+<!-- PRICES -->
+<section id="prices">
+    <div class="container">
+        <span class="section-label">Pricing</span>
+        <div class="price-tag">From £25 <span class="unit">/ month</span></div>
+        <p class="pricing-sub">Every business is different, so every quote is tailored. Fill in the form and I'll come back to you within 2 working days with a price based on your specific situation.</p>
+
+        <div class="quote-form">
+            <h3 class="form-title">Request a free quote</h3>
+            <p class="form-sub">Takes less than a minute. No commitment required.</p>
+            <!-- IMPORTANT: Replace xlgyvrlg below after signing up at formspree.io -->
+            <form action="https://formspree.io/f/xlgyvrlg" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" placeholder="James Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="business_type">Type of business</label>
+                    <select id="business_type" name="business_type" required>
+                        <option value="" disabled selected>Select your trade</option>
+                        <option>Barber / Hairdresser</option>
+                        <option>Nail Technician</option>
+                        <option>Cleaner</option>
+                        <option>Valet / Detailer</option>
+                        <option>Café / Food Business</option>
+                        <option>Electrician / Tradesperson</option>
+                        <option>Other sole trader</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="business_size">Business size</label>
+                        <select id="business_size" name="business_size" required>
+                            <option value="" disabled selected>Select</option>
+                            <option>Just me (sole trader)</option>
+                            <option>Me + 1–2 employees</option>
+                            <option>3 or more employees</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vat">VAT registered?</label>
+                        <select id="vat" name="vat" required>
+                            <option value="" disabled selected>Select</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                            <option>Not sure</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="invoices">Approximate transactions per month</label>
+                    <select id="invoices" name="invoices" required>
+                        <option value="" disabled selected>Select a range</option>
+                        <option>Under 20</option>
+                        <option>20 – 50</option>
+                        <option>50 – 100</option>
+                        <option>Over 100</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Anything else I should know? <span style="font-weight:400;color:#aaa">(optional)</span></label>
+                    <textarea id="message" name="message" rows="3" placeholder="e.g. I currently use a spreadsheet and want to get more organised..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send quote request →</button>
+                <p class="form-note">I'll reply to your email within 2 working days.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <span class="section-label">About</span>
+                <h2>The friendly neighbourhood bookkeeper.</h2>
+                <p>I'm Maann — a Leicester-based, first-class accounting graduate who kept noticing the same thing. Most small business owners weren't bad with money. Their records were just a mess.</p>
+                <p>I started MD Bookkeeping Support to help local sole traders — barbers, hairdressers, nail techs, cleaners, valets, and café owners — get their books sorted without the stress.</p>
+                <p>You don't need a big firm. You need someone who understands your world, keeps your records clean, and hands everything to your accountant ready to go.</p>
+            </div>
+            <div class="about-contact">
+                <span class="section-label">Get in touch</span>
+                <div class="contact-block">
+                    <p class="contact-label">Email</p>
+                    <p class="contact-value">
+                        <a href="mailto:mdbookkeepingsupport@gmail.com">mdbookkeepingsupport@gmail.com</a>
+                    </p>
+                </div>
+                <div class="contact-block">
+                    <p class="contact-label">Instagram</p>
+                    <p class="contact-value">
+                        <a href="https://instagram.com/mdbookkeepingsupport" target="_blank">@mdbookkeepingsupport</a>
+                    </p>
+                </div>
+                <div class="contact-block">
+                    <p class="contact-label">Based in</p>
+                    <p class="contact-value">Leicester, UK</p>
+                </div>
+                <a href="https://wa.me/447720218372" target="_blank" class="wa-btn">
+                    <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Message on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 MD Bookkeeping Support. Leicester, UK.</p>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/447720218372" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+    function closeMenu() {
+        document.getElementById('navLinks').classList.remove('open');
+    }
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('nav')) closeMenu();
+    });
+</script>
+</body>
+</html>
